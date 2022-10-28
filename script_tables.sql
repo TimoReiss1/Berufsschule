@@ -18,7 +18,7 @@ CREATE TABLE KUNDE (
 );
 
 CREATE TABLE ZUTAT(
-                      ZUTATENNR           INTEGER PRIMARY KEY NOT NULL,
+                      ZUTATENNR           INTEGER NOT NULL,
                       BEZEICHNUNG         VARCHAR(50),
                       EINHEIT        	VARCHAR (25),
                       NETTOPREIS	        DECIMAL(10,2),
@@ -26,18 +26,19 @@ CREATE TABLE ZUTAT(
                       LIEFERANT           INTEGER,
                       KALORIEN            INTEGER,
                       KOHLENHYDRATE       DECIMAL (10,2),
-                      PROTEIN             DECIMAL(10,2)
+                      PROTEIN             DECIMAL(10,2),
+                      PRIMARY KEY         (ZUTATENNR)
 );
 
 CREATE TABLE REZEPT(
-                       REZEPTID       INTEGER PRIMARY KEY NOT NULL,
+                       REZEPTID       SERIAL PRIMARY KEY NOT NULL,
                        REZEPTNAME     VARCHAR(20),
                        ZUTATENNR      INTEGER NOT NULL,
-                           VEGETARISCH    BOOLEAN DEFAULT FALSE,
-                       VEGAN          BOOLEAN DEFAULT FALSE,
-                       NUESSE         BOOLEAN DEFAULT FALSE,
-                       FRUTARISCH     BOOLEAN DEFAULT FALSE,
-                       LOWCARB        BOOLEAN DEFAULT FALSE
+                       VEGETARISCH    BOOLEAN,
+                       VEGAN          BOOLEAN,
+                       NUESSE         BOOLEAN,
+                       FRUTARISCH     BOOLEAN,
+                       LOWCARB        BOOLEAN
 );
 
 CREATE TABLE BESTELLUNG (
@@ -57,10 +58,11 @@ CREATE TABLE REZEPTZUTAT(
                             PRIMARY KEY     (REZEPTNR, ZUTATENNR)
 );
 
-CREATE TABLE BESTELLUNGZUTAT (
+CREATE TABLE BESTELLUNGREZEPT (
                                  BESTELLNR       INTEGER NOT NULL,
-                                 ZUTATENNR       INTEGER,
-                                 MENGE           INTEGER
+                                 REZEPTNR        INTEGER,
+                                 MENGE           INTEGER,
+                                 PRIMARY KEY (BESTELLNR, REZEPTNR)
 );
 
 CREATE TABLE LIEFERANT (
@@ -79,7 +81,7 @@ CREATE TABLE LIEFERANT (
 /******************************************************************************/
 
 
-
+/***BESTELLZUTATUMWANDELNZUREZEPTZUTATSELBESKONZEPTGLEICHESPRINZIP***/
 /******************************************************************************/
 /***                              Foreign Keys                              ***/
 /******************************************************************************/
