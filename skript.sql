@@ -57,7 +57,7 @@ CREATE TABLE BESTELLUNGZUTAT (
 );
 
 CREATE TABLE LIEFERANT (
-                           LIEFERANTENNR   PRIMARY KEY INTEGER NOT NULL,
+                           LIEFERANTENNR   INTEGER PRIMARY KEY NOT NULL,
                            LIEFERANTENNAME VARCHAR(50),
                            STRASSE         VARCHAR(50),
                            HAUSNR			  VARCHAR(6),
