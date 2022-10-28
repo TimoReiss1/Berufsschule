@@ -4,7 +4,7 @@ CREATE DATABASE krautundrueben2;
 
 
 CREATE TABLE KUNDE (
-                       KUNDENNR        INTEGER NOT NULL,
+                       KUNDENNR        INTEGER PRIMARY KEY NOT NULL,
                        NACHNAME        VARCHAR(50),
                        VORNAME         VARCHAR(50),
                        GEBURTSDATUM    DATE,
