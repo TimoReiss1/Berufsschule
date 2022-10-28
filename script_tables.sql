@@ -1,7 +1,7 @@
 \c postgres
-DROP DATABASE krautundrueben;
-CREATE DATABASE krautundrueben;
-\c krautundrueben
+DROP DATABASE krautundthueringerkloesse;
+CREATE DATABASE krautundthueringerkloesse;
+\c krautundthueringerkloesse
 
 
 CREATE TABLE KUNDE (
