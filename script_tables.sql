@@ -33,7 +33,6 @@ CREATE TABLE ZUTAT(
 CREATE TABLE REZEPT(
                        REZEPTNR       SERIAL PRIMARY KEY NOT NULL,
                        REZEPTNAME     VARCHAR(20),
-                       ZUTATENNR      INTEGER NOT NULL,
                        VEGETARISCH    BOOLEAN,
                        VEGAN          BOOLEAN,
                        NUESSE         BOOLEAN,
