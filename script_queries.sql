@@ -1,3 +1,21 @@
+
+/*Auswahl aller Zutaten eines Rezeptes nach Rezeptname*/
+
+/*Auswahl aller Rezepte einer bestimmten Ernährungskategorie*/
+/*SELECT * FROM rezept WHERE Ernährungskategorie = true;*/
+/* e.g. */
+SELECT * FROM rezept WHERE vegetarisch = true;
+
+/*Auswahl aller Rezepte, die eine gewisse Zutat enthalten*/
+
+/*Berechnung der durchschnittlichen Nährwerte aller Bestellungen eines Kunden*/
+
+/*Auswahl aller Zutaten, die bisher keinem Rezept zugeordnet sind*/
+
+
+
+
+
 /* join bestellung and bestellung rezept */
 SELECT bestellung.bestellnr, bestellung_rezept.rezeptnr, bestellung_rezept.menge, bestellung.kundennr, bestellung.bestelldatum, bestellung.rechnungsbetrag
 FROM bestellung JOIN bestellung_rezept ON bestellung.bestellnr = bestellung_rezept.bestellnr;
