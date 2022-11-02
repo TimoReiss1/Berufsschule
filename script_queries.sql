@@ -7,11 +7,20 @@ JOIN zutat ON rezept_zutat.zutatennr = zutat.zutatennr
 WHERE rezept.rezeptname = 'Thueringer Kloesse';
 
 /*Auswahl aller Rezepte einer bestimmten Ernährungskategorie*/
-/*SELECT * FROM rezept WHERE Ernährungskategorie = true;*/
 /* e.g. */
-SELECT * FROM rezept WHERE vegetarisch = true;
+SELECT rezept.rezeptnr, rezept.rezeptname, kategorie.kategoriename
+FROM rezept
+JOIN rezept_kategorie ON rezept.rezeptnr = rezept_kategorie.rezeptnr
+JOIN kategorie ON rezept_kategorie.kategorienr = kategorie.kategorienr
+WHERE kategorie.kategoriename = 'VEGETARISCH';
 
 /*Auswahl aller Rezepte, die eine gewisse Zutat enthalten*/
+/* e.g. */
+SELECT rezept.rezeptnr, rezept.rezeptname, rezept_zutat.zutatennr, zutat.bezeichnung as zutat
+FROM rezept
+JOIN rezept_zutat ON rezept.rezeptnr = rezept_zutat.rezeptnr
+JOIN zutat ON rezept_zutat.zutatennr = zutat.zutatennr
+WHERE zutat.bezeichnung = 'Ei';
 
 /*Berechnung der durchschnittlichen Nährwerte aller Bestellungen eines Kunden*/
 /*ROUND()*/
