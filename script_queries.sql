@@ -27,8 +27,8 @@ WHERE zutat.bezeichnung = 'Ei';
 SELECT 2001 as kundennr, ROUND(avg(kalorien_per_bestellnr), 2) AS kalorien, ROUND(avg(kohlenhydrate_per_bestellnr), 2) AS kohlenhydrate, ROUND(avg(protein_per_bestellnr), 2) AS protein
 FROM (
     SELECT SUM(zutat.kalorien * rezept_zutat.menge * bestellung_rezept.menge) AS kalorien_per_bestellnr,
-           SUM(zutat.kohlenhydrate * rezept_zutat.menge * bestellung_rezept.menge) as kohlenhydrate_per_bestellnr,
-           SUM(zutat.protein * rezept_zutat.menge * bestellung_rezept.menge) as protein_per_bestellnr
+           SUM(zutat.kohlenhydrate * rezept_zutat.menge * bestellung_rezept.menge) AS kohlenhydrate_per_bestellnr,
+           SUM(zutat.protein * rezept_zutat.menge * bestellung_rezept.menge) AS protein_per_bestellnr
     FROM bestellung
         JOIN bestellung_rezept ON bestellung.bestellnr = bestellung_rezept.bestellnr
         JOIN rezept ON rezept.rezeptnr = bestellung_rezept.rezeptnr
@@ -40,7 +40,12 @@ as x;
 
 
 /*Auswahl aller Zutaten, die bisher keinem Rezept zugeordnet sind*/
-
+SELECT z.zutatennr, z.bezeichnung
+FROM zutat as z
+WHERE z.zutatennr NOT IN (
+    SELECT r.zutatennr
+    FROM rezept_zutat as r
+);
 
 
 
@@ -97,3 +102,5 @@ FROM bestellung
          JOIN zutat ON rezept_zutat.zutatennr = zutat.zutatennr
 where bestellung.kundennr = 2001
 group by bestellung.kundennr;
+
+
