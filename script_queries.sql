@@ -24,8 +24,7 @@ WHERE zutat.bezeichnung = 'Ei';
 
 /*Berechnung der durchschnittlichen Nährwerte aller Bestellungen eines Kunden*/
 /*e.g.*/
-SELECT bestellung.kundennr, SUM(zutat.kalorien * rezept_zutat.menge * bestellung_rezept.menge) as kalorien,
-       /*AVG(kalorien),*/
+SELECT bestellung.kundennr, bestellung.bestellnr, SUM(zutat.kalorien * rezept_zutat.menge * bestellung_rezept.menge) as kalorien,
        SUM(zutat.kohlenhydrate * rezept_zutat.menge * bestellung_rezept.menge) as kohlenhydrate,
        SUM(zutat.protein * rezept_zutat.menge * bestellung_rezept.menge) as protein
 FROM bestellung
@@ -34,7 +33,7 @@ FROM bestellung
          JOIN rezept_zutat ON rezept.rezeptnr = rezept_zutat.rezeptnr
          JOIN zutat ON rezept_zutat.zutatennr = zutat.zutatennr
 where bestellung.kundennr = 2001
-group by bestellung.kundennr;
+group by bestellung.kundennr, bestellung.bestellnr;
 
 /*Auswahl aller Zutaten, die bisher keinem Rezept zugeordnet sind*/
 
@@ -64,3 +63,14 @@ FROM rezept
          JOIN rezept_zutat ON rezept.rezeptnr = rezept_zutat.rezeptnr
          JOIN zutat ON rezept_zutat.zutatennr = zutat.zutatennr
 group by rezept.rezeptnr;
+
+/**/
+SELECT bestellung.kundennr, SUM(zutat.kalorien * rezept_zutat.menge * bestellung_rezept.menge) as kalorien,
+       SUM(zutat.kohlenhydrate * rezept_zutat.menge * bestellung_rezept.menge) as kohlenhydrate,
+       SUM(zutat.protein * rezept_zutat.menge * bestellung_rezept.menge) as protein
+FROM bestellung
+         JOIN bestellung_rezept ON bestellung.bestellnr = bestellung_rezept.bestellnr
+         JOIN rezept ON rezept.rezeptnr = bestellung_rezept.rezeptnr
+         JOIN rezept_zutat ON rezept.rezeptnr = rezept_zutat.rezeptnr
+         JOIN zutat ON rezept_zutat.zutatennr = zutat.zutatennr
+group by bestellung.kundennr;
